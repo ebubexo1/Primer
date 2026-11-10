@@ -1,0 +1,29 @@
+{
+  "name": "primer",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "node .next/standalone/server.js"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.119.0",
+    "ioredis": "^5.4.1",
+    "jsqr": "^1.4.0",
+    "next": "^15.0.0",
+    "pako": "^2.1.0",
+    "pg": "^8.12.0",
+    "qrcode": "^1.5.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/pako": "^2",
+    "@types/pg": "^8",
+    "@types/qrcode": "^1",
+    "@types/react": "^19",
+    "typescript": "^5.5.0"
+  }
+}
