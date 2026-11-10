@@ -1,56 +1,76 @@
-'use client';
-import { useEffect, useMemo, useState } from 'react';
-import { start, show, options, shuffle, generate, type Prob, type State } from '@/lib/engine';
-import { store, sync } from '@/lib/store';
+import QRCode from 'qrcode';
+import OpenBar from './openbar';
 
-export default function Feed() {
-  const [ready, setReady] = useState(false);
-  const [probs, setProbs] = useState<Prob[]>([]);
-  const [idx, setIdx] = useState(0);
-  const [state, setState] = useState<State | null>(null);
-  const [hist, setHist] = useState<string[]>([]);
-  const [step, setStep] = useState(0);
-  const [wrong, setWrong] = useState(0);        // wrong taps on this step
-  const [firstTry, setFirstTry] = useState(0);  // steps solved first try (score)
-  const [total, setTotal] = useState(0);
-  const [shake, setShake] = useState('');
-  const [net, setNet] = useState('');
-  const [recs, setRecs] = useState<any[]>([]);
+export const metadata = { title: 'Primer — the whole lesson fits in a piece of paper' };
+// Every artifact on this page is a real product artifact: a real scannable Primer code,
+// the real paper equation card, the real deck card. Nothing is stock illustration.
+export default async function Welcome() {
+  const qr = await QRCode.toDataURL('https://github.com/ebubexo1/Primer',
+    { errorCorrectionLevel: 'M', margin: 1, width: 300, color: { dark: '#1c2624', light: '#fffefb' } });
 
-  const load = (i: number, ps = probs) => { const p = ps[i]; if (p) { setState(start(p)); setHist([]); setStep(0); setWrong(0); } else setState(null); };
-  useEffect(() => { const ps = store.problems(); const i = store.idx(); setProbs(ps); setIdx(i); setRecs(store.recs()); setReady(true); load(i, ps);
-    const on = () => doSync(); window.addEventListener('online', on); return () => window.removeEventListener('online', on); }, []);
+  return (<div className="welcome">
+    <header className="w-nav noprint">
+      <b className="wordmark">Primer</b>
+      <a className="btn primary" href="/app">Open Primer</a>
+    </header>
 
-  const opts = useMemo(() => (state && !state.done ? shuffle(options(state)) : []), [state?.a, state?.b, state?.c, idx]);
-  const doSync = async () => { const r = await sync(); setNet(r.ok ? `Synced ${r.synced ?? 0} steps` : 'Offline: will sync later'); setRecs(store.recs()); };
+    <section className="hero">
+      <h1>The whole lesson fits in a piece of paper.</h1>
+      <p className="lede">Print a sheet. Students scan it. They learn all week — even when the internet isn't there.</p>
+      <div className="cta-row"><a className="btn primary" href="/app">Open Primer</a><a className="btn link" href="#how">How it works</a></div>
+      <div className="hero-art" aria-hidden="true">
+        <div className="sheet"><img src={qr} alt="" width={150} height={150} /><span className="mut">Assignment A1F3 · 20 problems</span></div>
+        <div className="arrow">→</div>
+        <div className="phonecard"><div className="panel paper"><div className="eq">3x + 2 = 11</div></div></div>
+      </div>
+    </section>
 
-  const pick = (o: any) => {
-    const p = probs[idx];
-    store.push({ cid: crypto.randomUUID(), pid: p.id, step, optionId: o.id, misc: o.misc, correct: o.correct, ts: Date.now() });
-    if (!o.correct) { navigator.vibrate?.(200); setShake(o.id); setWrong((w) => w + 1); setTimeout(() => setShake(''), 350); return; }
-    setHist((h) => [...h, show(state!)]); setTotal((t) => t + 1); if (wrong === 0) setFirstTry((f) => f + 1);
-    setState(o.next); setStep((s) => s + 1); setWrong(0);
-  };
-  const next = () => { const i = idx + 1; store.setIdx(i); setIdx(i); load(i); doSync(); };
-  const demo = () => { const ps = generate(20).map(([a, b, c], j) => ({ id: `demo:0:${j}`, a, b, c })); store.addProblems(ps); const all = store.problems(); setProbs(all); load(idx, all); };
+    <section id="how" className="steps">
+      <div className="step"><span>01</span><h2>Print</h2><p><b>Paper is the lesson plan.</b> A sheet of QR codes, twenty problems, no student accounts.</p></div>
+      <div className="step"><span>02</span><h2>Scan</h2><p><b>One look and it's theirs.</b> The phone reads each code once and the lesson now lives on the phone.</p></div>
+      <div className="step"><span>03</span><h2>Solve</h2><p><b>No internet. Ever.</b> Airplane mode, dead zone, data finished — the work keeps going.</p></div>
+    </section>
 
-  if (!ready) return null;
-  if (!probs[idx]) return (<><h1 className="title">Solve</h1>
-    <div className="panel"><h2>No problems on this phone</h2>
-    <p className="mut">Scan a teacher's QR sheet while online or offline.</p>
-    <a className="btn primary" href="/scan">Scan QR codes</a><button onClick={demo}>Load 20 demo problems</button></div></>);
+    <section className="tutor">
+      <div className="t-demo panel paper">
+        <div className="eq">3x + 2 = 11</div>
+        <button disabled>Subtract 2 from the left side only</button>
+        <button disabled className="hint">Divide both sides by 3</button>
+      </div>
+      <div className="t-copy"><h2>Every mistake becomes a lesson.</h2>
+        <p>Pick a wrong step and the app teaches the idea behind it — as a short card, not a red X.</p></div>
+    </section>
 
-  return (<><h1 className="title">Solve</h1>
-    <div className="panel paper">
-      <div className="progress" role="progressbar" aria-label={`Problem ${idx + 1} of ${probs.length}`}>
-        <i style={{ width: `${((idx + 1) / probs.length) * 100}%` }} /></div>
-      <div className="mut">Problem {idx + 1} of {probs.length} · first-try {firstTry}/{total}</div>
-      {hist.map((h, i) => <div key={i} className="hist">{h}</div>)}
-      <div className="eq">{state ? show(state) : ''}</div></div>
-    {state?.done ? (<div className="panel"><b>Solved.</b><button className="primary" onClick={next}>Next problem</button></div>) : (
-      <div><div className="mut">Choose the next step{wrong >= 2 ? ' (hint highlighted)' : ''}</div>
-        {opts.map((o) => <button key={o.id} className={`${shake === o.id ? 'bad' : ''} ${wrong >= 2 && o.correct ? 'hint' : ''}`} onClick={() => pick(o)}>{o.label}</button>)}</div>)}
-    {recs.length > 0 && <div className="panel"><b>Recommended Deck cards</b>{recs.map((r) => <a key={r.id} className="btn link" href={`/decks?card=${r.id}`}>{r.title}</a>)}</div>}
-    <p className="mut">{net} <a href="#" onClick={(e) => { e.preventDefault(); doSync(); }}>Sync now</a></p>
-  </>);
+    <section className="voice">
+      <div className="t-copy"><h2>It reads out loud.</h2>
+        <p>The same transcript plays as speech, on the cheapest phone in the room. No SIM, no stream.</p></div>
+      <div className="t-demo panel">
+        <b>The 1929 crash and 1933</b>
+        <p className="mut">"Hyperinflation in 1923 had wiped out savings. Then the 1929 crash ended foreign loans…"</p>
+        <a className="btn primary" href="/decks?card=weimar-crash">Play this card</a>
+      </div>
+    </section>
+
+    <section className="teachers">
+      <h2>Your printer is a classroom.</h2>
+      <div className="stats">
+        <div><b>100+</b><span className="mut">problems from one click</span></div>
+        <div><b>1</b><span className="mut">QR code is self-contained — lost one, lose nothing</span></div>
+        <div><b>0</b><span className="mut">student logins, apps, or bars of signal</span></div>
+      </div>
+      <p className="lede">Keep the lesson plan in paper. Primer keeps the learning in their pocket.</p>
+      <a className="btn primary" href="/teacher">Print your first sheet</a>
+    </section>
+
+    <section className="close">
+      <h2>No accounts. No tracking. Just work.</h2>
+      <p className="lede">Open Primer. One tap, and the class starts.</p>
+      <a className="btn primary" href="/app">Open Primer</a>
+    </section>
+
+    <footer className="noprint">
+      <a href="/welcome">Primer</a><a href="https://github.com/ebubexo1/Primer">GitHub</a><a href="/app">Back to the app</a>
+      <OpenBar />
+    </footer>
+  </div>);
 }

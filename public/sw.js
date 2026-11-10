@@ -1,5 +1,5 @@
-const V = 'primer-v2';
-const SHELL = ['/', '/scan', '/decks', '/teacher', '/manifest.json'];
+const V = 'primer-v3';
+const SHELL = ['/', '/app', '/scan', '/decks', '/teacher', '/welcome', '/manifest.json'];
 self.addEventListener('install', (e) => { e.waitUntil(caches.open(V).then((c) => c.addAll(SHELL))); self.skipWaiting(); });
 self.addEventListener('activate', (e) => {
   e.waitUntil(caches.keys().then((ks) => Promise.all(ks.filter((k) => k !== V).map((k) => caches.delete(k))))); self.clients.claim();

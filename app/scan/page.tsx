@@ -49,7 +49,7 @@ export default function Scan() {
   return (<><h1 className="title">Scan</h1>
     <div className="panel noprint"><video ref={v} playsInline muted /><p>{msg}</p>
     <p className="mut">{count} problems on this phone. Works in airplane mode.</p>
-    <a className="btn primary" href="/">Start solving</a></div>
+    <a className="btn primary" href="/app">Start solving</a></div>
     <div className="panel noprint"><div className="mut">Fallback: paste a code's text</div><textarea rows={3} value={paste} onChange={(e) => setPaste(e.target.value)} />
       <button onClick={() => setMsg(ingest(paste.trim()) ? 'Added' : 'Not a Primer code')}>Add</button></div></>);
 }
