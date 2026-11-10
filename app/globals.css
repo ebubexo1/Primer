@@ -132,6 +132,22 @@ textarea { resize:vertical; }
 .welcome .cta-row { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
 .welcome .cta-row .btn { width:auto; min-width:170px; text-align:center; justify-content:center; }
 
+/* Hero choreography: words rise as if written, then a highlighter sweeps
+   "a piece of paper"; the rest of the hero follows the headline in. */
+.hero h1 span { display:inline-block; margin-right:.26ch; opacity:0; transform:translateY(.4em);
+  animation:word .6s var(--ease) both; animation-delay:calc(var(--i)*.055s + .1s); }
+.hero h1 span.hl { background:linear-gradient(transparent 42%,var(--hi-bg) 42%) no-repeat 0 100%;
+  background-size:0% 100%; animation:word .6s var(--ease) both, sweep .45s var(--ease) both;
+  animation-delay:calc(var(--i)*.055s + .1s), calc(var(--i)*.055s + .95s); }
+@keyframes word { from { opacity:0; transform:translateY(.4em) } to { opacity:1; transform:none } }
+@keyframes sweep { from { background-size:0% 100% } to { background-size:100% 100% } }
+.hero > :not(h1) { animation:rise .6s var(--ease) both; }
+.hero > :nth-child(2) { animation-delay:.55s; }
+.hero > :nth-child(3) { animation-delay:.7s; }
+.hero > :nth-child(4) { animation-delay:.85s; }
+.hero .arrow { animation:nudge 1.8s var(--ease) 1.4s infinite alternate; }
+@keyframes nudge { to { transform:translateX(9px) } }
+
 .hero-art { display:flex; align-items:center; justify-content:center; gap:28px; margin-top:64px; flex-wrap:wrap; }
 .hero-art .sheet { background:#fff; padding:14px 18px; border-radius:14px; box-shadow:var(--shadow);
   display:flex; flex-direction:column; align-items:center; gap:8px; }

@@ -1,5 +1,10 @@
 import QRCode from 'qrcode';
+import type { CSSProperties } from 'react';
 import OpenBar from './openbar';
+
+// Headline is split so each word can rise in separately; the last four words
+// get the highlighter sweep (see .hero h1 in globals.css).
+const HERO = 'The whole lesson fits in a piece of paper.'.split(' ');
 
 export const metadata = { title: 'Primer — the whole lesson fits in a piece of paper' };
 // Every artifact on this page is a real product artifact: a real scannable Primer code,
@@ -15,7 +20,11 @@ export default async function Welcome() {
     </header>
 
     <section className="hero">
-      <h1>The whole lesson fits in a piece of paper.</h1>
+      <h1 aria-label="The whole lesson fits in a piece of paper.">
+        {HERO.map((w, i) => (
+          <span key={i} aria-hidden="true" className={i >= HERO.length - 4 ? 'hl' : ''} style={{ '--i': i } as CSSProperties}>{w}</span>
+        ))}
+      </h1>
       <p className="lede">Print a sheet. Students scan it. They learn all week — even when the internet isn't there.</p>
       <div className="cta-row"><a className="btn primary" href="/app">Open Primer</a><a className="btn link" href="#how">How it works</a></div>
       <div className="hero-art" aria-hidden="true">
