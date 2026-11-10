@@ -1,4 +1,4 @@
-const V = 'primer-v3';
+const V = 'primer-v4';
 const SHELL = ['/', '/app', '/scan', '/decks', '/teacher', '/welcome', '/manifest.json'];
 self.addEventListener('install', (e) => { e.waitUntil(caches.open(V).then((c) => c.addAll(SHELL))); self.skipWaiting(); });
 self.addEventListener('activate', (e) => {
