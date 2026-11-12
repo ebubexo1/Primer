@@ -157,6 +157,11 @@ textarea { resize:vertical; }
 @keyframes float { to { transform:translateY(-8px) } }
 .phonecard .panel { width:250px; margin:0; }
 
+/* Empty solve state: the owl waits with you */
+.empty { text-align:center; padding:32px 20px; }
+.empty .mascot { border-radius:16px; margin:0 auto 12px; display:block; animation:bob 3.2s var(--ease) infinite alternate; }
+.empty .btn, .empty button { text-align:center; }
+
 .welcome .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:40px; padding:72px 0;
   border-top:1px solid var(--sep); }
 .welcome .step span { font:600 1rem var(--font-mono,ui-monospace),SFMono-Regular,Menlo,monospace; color:var(--tint); }

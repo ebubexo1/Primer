@@ -36,7 +36,8 @@ export default function Feed() {
 
   if (!ready) return null;
   if (!probs[idx]) return (<><h1 className="title">Solve</h1>
-    <div className="panel"><h2>No problems on this phone</h2>
+    <div className="panel empty"><img className="mascot" src="/owl.svg" alt="" width={72} height={72} />
+    <h2>No problems on this phone</h2>
     <p className="mut">Scan a teacher's QR sheet while online or offline.</p>
     <a className="btn primary" href="/scan">Scan QR codes</a><button onClick={demo}>Load 20 demo problems</button></div></>);
 
