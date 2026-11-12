@@ -1,27 +1,27 @@
 :root { color-scheme: light dark; }
 
-/* ── Tokens: light = warm paper, dark = deep ink. Same roles, tuned per mode. ── */
+/* ── Tokens: light = cream paper, dark = ink slate. Template palette: lime/cream/near-black. ── */
 :root {
-  --bg:#f3f1ec; --card:#fffefb; --fg:#20252d; --mut:#6d6a63;
-  --sep:rgba(60,60,67,.22); --card-line:rgba(60,60,67,.08);
-  --ctl:#ffffff; --ctl-line:rgba(60,60,67,.16);
-  --tint:#0f766e; --fill:#0f766e; --fill-fg:#ffffff;
-  --ok:#157f47; --bad:#d92d20; --margin:rgba(203,116,108,.55);
-  --hi-bg:#fde68a; --hi-fg:#7c4a03;
-  --grid:rgba(32,37,45,.09); --seg:rgba(60,60,67,.12); --pill:rgba(15,118,110,.1);
-  --shadow:0 1px 2px rgba(35,28,15,.04), 0 12px 32px rgba(35,28,15,.07);
+  --bg:#f2f3e1; --card:#fbfcf2; --fg:#191919; --mut:#6e705e;
+  --sep:rgba(25,25,25,.14); --card-line:rgba(25,25,25,.07);
+  --ctl:#ffffff; --ctl-line:rgba(25,25,25,.12);
+  --tint:#5f7d1c; --fill:#a8c150; --fill-fg:#191919; --bar:#191919;
+  --ok:#5f7d1c; --bad:#d92d20; --margin:rgba(203,116,108,.55);
+  --hi-bg:#d9e8a2; --hi-fg:#3f5410;
+  --grid:rgba(25,25,25,.08); --seg:rgba(25,25,25,.1); --pill:rgba(168,193,80,.22);
+  --shadow:0 1px 2px rgba(30,35,10,.05), 0 10px 30px rgba(30,35,10,.07);
   --ease:cubic-bezier(.22,1,.36,1);
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg:#0a0d14; --card:#131926; --fg:#eef2f8; --mut:#98a2b6;
-    --sep:rgba(148,163,184,.18); --card-line:rgba(255,255,255,.05);
-    --ctl:#1c2434; --ctl-line:rgba(148,163,184,.24);
-    --tint:#5eead4; --fill:#14b8a6; --fill-fg:#06211c;
-    --ok:#86efac; --bad:#f87171; --margin:rgba(248,113,113,.35);
-    --hi-bg:rgba(252,211,77,.18); --hi-fg:#fcd34d;
-    --grid:rgba(238,242,248,.07); --seg:rgba(148,163,184,.2); --pill:rgba(94,234,212,.13);
-    --shadow:0 14px 40px rgba(0,0,0,.45);
+    --bg:#0f0f0e; --card:#1c1c1b; --fg:#f2f3e1; --mut:#a0a28c;
+    --sep:rgba(242,243,225,.14); --card-line:rgba(242,243,225,.06);
+    --ctl:#262625; --ctl-line:rgba(242,243,225,.12);
+    --tint:#c9dd77; --fill:#a8c150; --fill-fg:#191919; --bar:#c9dd77;
+    --ok:#c9dd77; --bad:#f87171; --margin:rgba(248,113,113,.4);
+    --hi-bg:rgba(201,221,119,.25); --hi-fg:#dce9a4;
+    --grid:rgba(242,243,225,.06); --seg:rgba(242,243,225,.16); --pill:rgba(201,221,119,.16);
+    --shadow:0 14px 40px rgba(0,0,0,.5);
   }
 }
 
@@ -48,7 +48,7 @@ h2 { font-size:1.375rem; font-weight:650; margin:0 0 8px; }
 main p a { color:var(--tint); }
 
 .panel { position:relative; overflow:hidden; background:var(--card); border:1px solid var(--card-line);
-  border-radius:20px; padding:20px; margin:14px 0; box-shadow:var(--shadow); }
+  border-radius:24px; padding:20px; margin:14px 0; box-shadow:var(--shadow); }
 
 /* Signature: the worksheet — graph grid + margin rule, stamped in */
 .paper { background-image:
@@ -60,9 +60,9 @@ main p a { color:var(--tint); }
 .paper .mut { margin-left:16px; }
 @keyframes stamp { from { transform:scale(.965); opacity:.4 } }
 
-/* Segmented progress: which problem you are on, growing toward done */
-.progress { height:4px; border-radius:4px; background:var(--seg); overflow:hidden; margin:4px 0 12px 16px; }
-.progress i { display:block; height:100%; border-radius:4px; background:var(--tint);
+/* Segmented progress: ink bar on cream, lime bar on ink — like the template's Gantt rows */
+.progress { height:6px; border-radius:999px; background:var(--seg); overflow:hidden; margin:4px 0 12px 16px; }
+.progress i { display:block; height:100%; border-radius:999px; background:var(--bar);
   transition:width .45s var(--ease); }
 .eq { font:600 1.75rem/1.4 var(--font-mono,ui-monospace),SFMono-Regular,Menlo,Consolas,monospace; text-align:center; margin:8px 0; }
 .hist { color:var(--mut); font:.9375rem var(--font-mono,ui-monospace),SFMono-Regular,Menlo,Consolas,monospace; text-align:center; }
@@ -72,8 +72,8 @@ main p a { color:var(--tint); }
   display:grid; grid-template-columns:repeat(4,1fr); gap:2px; padding:6px; border-radius:30px;
   border:1px solid var(--card-line); backdrop-filter:blur(24px) saturate(160%);
   -webkit-backdrop-filter:blur(24px) saturate(160%); box-shadow:var(--shadow); }
-@media (prefers-color-scheme: light) { .tabbar { background:rgba(255,254,251,.75) } }
-@media (prefers-color-scheme: dark) { .tabbar { background:rgba(16,21,32,.72) } }
+@media (prefers-color-scheme: light) { .tabbar { background:rgba(251,252,242,.82) } }
+@media (prefers-color-scheme: dark) { .tabbar { background:rgba(18,18,17,.78) } }
 .tabbar a { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;
   min-height:52px; border-radius:24px; color:var(--mut); font-size:.6875rem; text-decoration:none;
   -webkit-tap-highlight-color:transparent; transition:background-color .2s var(--ease), color .2s var(--ease); }
@@ -83,18 +83,16 @@ main p a { color:var(--tint); }
 .tabbar svg { width:24px; height:24px; }
 body:has(.welcome) .tabbar { display:none; }   /* the welcome page carries its own navigation */
 
-/* Controls */
+/* Controls: full pills, flat, lime primary with ink text (template language) */
 button, .btn { display:block; width:100%; min-height:44px; text-align:left; background:var(--ctl); color:var(--fg);
-  border:1px solid var(--ctl-line); border-radius:14px; padding:11px 14px; margin:8px 0;
+  border:1px solid var(--ctl-line); border-radius:999px; padding:11px 16px; margin:8px 0;
   font:inherit; font-size:1.0625rem; cursor:pointer; text-decoration:none; -webkit-tap-highlight-color:transparent;
   transition:transform .18s var(--ease), border-color .18s var(--ease), background-color .18s var(--ease); }
 button:hover, .btn:hover { border-color:var(--tint); }
 button:active, .btn:active { opacity:.85; transform:scale(.97); }
 button:disabled { opacity:.4; }
-.primary { background:var(--fill); color:var(--fill-fg); border-color:transparent; font-weight:600; text-align:center;
-  box-shadow:0 6px 18px color-mix(in srgb,var(--fill) 30%,transparent); }
-.primary:hover { border-color:transparent; filter:brightness(1.07); }
-.primary:active { box-shadow:0 2px 8px color-mix(in srgb,var(--fill) 25%,transparent); }
+.primary { background:var(--fill); color:var(--fill-fg); border-color:transparent; font-weight:650; text-align:center; }
+.primary:hover { border-color:transparent; filter:brightness(1.05); }
 .hint { border-color:transparent; background:linear-gradient(transparent 35%,var(--hi-bg) 35%); color:var(--hi-fg); font-weight:600; }
 .hint:hover { border-color:transparent; }
 .bad { animation:shake .3s; border-color:var(--bad)!important; }
@@ -145,14 +143,16 @@ textarea { resize:vertical; }
 .hero > :nth-child(2) { animation-delay:.55s; }
 .hero > :nth-child(3) { animation-delay:.7s; }
 .hero > :nth-child(4) { animation-delay:.85s; }
-.hero .arrow { animation:nudge 1.8s var(--ease) 1.4s infinite alternate; }
-@keyframes nudge { to { transform:translateX(9px) } }
 
 .hero-art { display:flex; align-items:center; justify-content:center; gap:28px; margin-top:64px; flex-wrap:wrap; }
 .hero-art .sheet { background:#fff; padding:14px 18px; border-radius:14px; box-shadow:var(--shadow);
   display:flex; flex-direction:column; align-items:center; gap:8px; }
 .hero-art .sheet img { border-radius:8px; }
 .hero-art .arrow { font:600 1.5rem var(--font-mono,ui-monospace),SFMono-Regular,Menlo,monospace; color:var(--mut); }
+.hero-art .mascot img { border-radius:16px; animation:bob 3.2s var(--ease) 1s infinite alternate; }
+@keyframes bob { from { transform:translateY(4px) rotate(-3deg) } to { transform:translateY(-6px) rotate(3deg) } }
+.wordmark { display:flex; align-items:center; gap:8px; }
+.wordmark img { border-radius:9px; box-shadow:var(--shadow); }
 .phonecard { animation:float 6s var(--ease) infinite alternate; }
 @keyframes float { to { transform:translateY(-8px) } }
 .phonecard .panel { width:250px; margin:0; }
@@ -173,8 +173,15 @@ textarea { resize:vertical; }
 
 .welcome .teachers { text-align:center; padding:72px 0; border-top:1px solid var(--sep); }
 .welcome .teachers .btn { width:fit-content; min-width:200px; margin:24px auto 0; text-align:center; }
-.stats { display:flex; justify-content:center; gap:56px; margin:32px 0; flex-wrap:wrap; }
-.stats b { display:block; font:600 2rem var(--font-mono,ui-monospace),SFMono-Regular,Menlo,monospace; letter-spacing:-.02em; }
+/* Stat tiles: big numeral on a colored card, like the template's "4 Finished / 2 Doing" */
+.stats { display:flex; justify-content:center; gap:14px; margin:32px 0; flex-wrap:wrap; }
+.stats > div { width:150px; padding:20px 18px; border-radius:24px; text-align:left;
+  background:var(--fill); color:var(--fill-fg); }
+.stats > div:nth-child(2) { background:var(--fg); color:var(--bg); }
+.stats > div:nth-child(2) b { color:inherit; }
+.stats > div:nth-child(3) { background:var(--card); color:var(--fg); box-shadow:var(--shadow); }
+.stats b { display:block; font:600 2.25rem/1.15 var(--font-mono,ui-monospace),SFMono-Regular,Menlo,monospace; letter-spacing:-.02em; }
+.stats .mut { color:inherit; opacity:.72; }
 
 .welcome .close { text-align:center; padding:96px 0 72px; }
 .welcome .close .btn { width:fit-content; min-width:200px; margin:18px auto 0; text-align:center; }

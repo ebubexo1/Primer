@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Primer owl">
+  <!-- Primer mascot: flat, friendly, template-palette owl -->
+  <!-- ear tufts -->
+  <path d="M28 34 C24 18 30 10 40 14 C46 16 50 22 51 29 Z" fill="#e8a33d"/>
+  <path d="M92 34 C96 18 90 10 80 14 C74 16 70 22 69 29 Z" fill="#e8a33d"/>
+  <!-- wings behind body -->
+  <path d="M14 52 C6 66 8 92 22 102 C30 107 36 104 34 92 L28 56 Z" fill="#6b4423"/>
+  <path d="M106 52 C114 66 112 92 98 102 C90 107 84 104 86 92 L92 56 Z" fill="#6b4423"/>
+  <!-- body: one big soft blob -->
+  <path d="M60 12 C86 12 102 32 102 62 C102 90 88 108 60 108 C32 108 18 90 18 62 C18 32 34 12 60 12 Z" fill="#efe3c8"/>
+  <!-- head cap -->
+  <path d="M60 12 C80 12 94 24 98 42 C86 34 74 31 60 31 C46 31 34 34 22 42 C26 24 40 12 60 12 Z" fill="#6b4423"/>
+  <!-- facial discs -->
+  <circle cx="42" cy="50" r="16" fill="#f7eed9"/>
+  <circle cx="78" cy="50" r="16" fill="#f7eed9"/>
+  <!-- eyes: white ring, amber iris, ink pupil, sparkle -->
+  <circle cx="42" cy="50" r="12" fill="#ffffff"/>
+  <circle cx="78" cy="50" r="12" fill="#ffffff"/>
+  <circle cx="42" cy="50" r="8" fill="#f0b429"/>
+  <circle cx="78" cy="50" r="8" fill="#f0b429"/>
+  <circle cx="42" cy="50" r="4" fill="#191919"/>
+  <circle cx="78" cy="50" r="4" fill="#191919"/>
+  <circle cx="44" cy="48" r="1.6" fill="#ffffff"/>
+  <circle cx="80" cy="48" r="1.6" fill="#ffffff"/>
+  <!-- beak -->
+  <path d="M60 54 L66 62 C63 66 57 66 54 62 Z" fill="#f0b429"/>
+  <!-- belly speckles -->
+  <path d="M52 82 q4 -5 8 0 M66 82 q4 -5 8 0 M45 92 q4 -5 8 0 M59 92 q4 -5 8 0 M73 92 q4 -5 8 0 M52 100 q4 -5 8 0 M66 100 q4 -5 8 0" fill="none" stroke="#cbb98d" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- feet -->
+  <path d="M48 106 l-4 6 M50 108 l-1 7 M53 106 l4 6" stroke="#e8a33d" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  <path d="M72 106 l-4 6 M70 108 l1 7 M67 106 l-4 6" stroke="#e8a33d" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+</svg>

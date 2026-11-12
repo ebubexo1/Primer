@@ -15,7 +15,7 @@ export default async function Welcome() {
 
   return (<div className="welcome">
     <header className="w-nav noprint">
-      <b className="wordmark">Primer</b>
+      <b className="wordmark"><img src="/owl.svg" alt="" width={34} height={34} />Primer</b>
       <a className="btn primary" href="/app">Open Primer</a>
     </header>
 
@@ -29,7 +29,7 @@ export default async function Welcome() {
       <div className="cta-row"><a className="btn primary" href="/app">Open Primer</a><a className="btn link" href="#how">How it works</a></div>
       <div className="hero-art" aria-hidden="true">
         <div className="sheet"><img src={qr} alt="" width={150} height={150} /><span className="mut">Assignment A1F3 · 20 problems</span></div>
-        <div className="arrow">→</div>
+        <div className="mascot"><img src="/owl.svg" alt="" width={64} height={64} /></div>
         <div className="phonecard"><div className="panel paper"><div className="eq">3x + 2 = 11</div></div></div>
       </div>
     </section>
